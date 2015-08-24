@@ -80,9 +80,9 @@
             </div>
             <div>
             <pre style="box-shadow: none">
-<span >db.contributors.findOne({_id: ObjectId("524048b68faa3a7de509a5bb")});</span>
+<span>db.contributors.findOne({_id: ObjectId("524048b68faa3a7de509a5bb")});</span>
                 <!-- @formatter:off -->
-                <code class="json">
+                <code >
 {
   "_id": ObjectId("524048b68faa3a7de509a5bb"),
   "name" : "Ivan",
@@ -210,7 +210,7 @@
                 <img src="img/consistency_knob.png" class="borderless_image vertically_middle_aligned"
                      style="width: 256px; height: 220px">
                 <figcaption style="font-size: large">
-                   Consistency
+                    Consistency
                 </figcaption>
             </div>
             <div style="margin-top: 100px">
@@ -248,7 +248,8 @@
 
         <section>
             <div style="margin-bottom: 25px;">
-                <img src="img/fresh.png" class="borderless_image vertically_middle_aligned" style="width: 52px; height: 52px">
+                <img src="img/fresh.png" class="borderless_image vertically_middle_aligned"
+                     style="width: 52px; height: 52px">
                 <span>The good parts ... </span>
             </div>
             <div>
@@ -264,7 +265,8 @@
 
         <section>
             <div style="margin-bottom: 25px;">
-                <img src="img/rotten.png" class="borderless_image vertically_middle_aligned" style="width: 52px; height: 52px">
+                <img src="img/rotten.png" class="borderless_image vertically_middle_aligned"
+                     style="width: 52px; height: 52px">
                 <span>... and the not so good parts</span>
             </div>
             <div>
@@ -319,23 +321,19 @@
             <div style="padding-top: 25px; margin-bottom: 50px">
                 <span style="float: left">MongoDB Shell</span>
             </div>
-            <div>
+
             <pre style="box-shadow: none">
-                <code class="json">
-                    db.characters.insert({first_name: 'Eddard', second_name: 'Stark'});
-                </code>
+                <code style="text-align: center"><!-- @formatter:on -->db.characters.insert({first_name: 'Eddard', second_name:'Stark'});<!-- @formatter:off --></code>
             </pre>
-            </div>
+
             <div style="padding-top: 25px; margin-bottom: 50px">
                 <span style="float: left">Jongo</span>
             </div>
-            <div>
+
             <pre style="box-shadow: none">
-                <code class="json">
-                    characters.insert("{first_name: 'Eddard', second_name: 'Stark'}");
-                </code>
+                <code style="text-align: center"><!-- @formatter:on -->characters.insert("{first_name: 'Eddard', second_name:'Stark'}");<!-- @formatter:off --></code>
             </pre>
-            </div>
+
 
         </section>
 
@@ -348,51 +346,84 @@
             </div>
             <div>
             <pre style="box-shadow: none">
-                <code class="json">
-                    db.characters.findOne({_id : ObjectId("525ae7e130049e2a5c27ee39")});
-                </code>
+                <code style="text-align: center"><!-- @formatter:on -->db.characters.findOne({_id :ObjectId("525ae7e130049e2a5c27ee39")});<!-- @formatter:off --></code>
+            </pre>
+                </div>
+                <div style="padding-top: 25px; margin-bottom: 50px">
+                    <span style="float: left">Jongo</span>
+                </div>
+                <div>
+            <pre style="box-shadow: none">
+                <code style="text-align: center"><!-- @formatter:on -->characters.findOne(newObjectId("525ae7e130049e2a5c27ee39")).as(...);<!-- @formatter:off --></code>
+            </pre>
+                </div>
+            </section>
+
+        <section>
+
+            <section>
+                <div>
+                    <span>Read</span>
+                </div>
+                <div style="padding-top: 25px; margin-bottom: 50px">
+                    <span style="float: left">MongoDB Shell</span>
+                </div>
+                <div>
+            <pre style="box-shadow: none">
+                <code style="text-align: center"><!-- @formatter:on -->db.characters.findOne({gender: 'FEMALE', first_name: 'Arya'});<!-- @formatter:off --></code>
+            </pre>
+                </div>
+                <div style="padding-top: 25px; margin-bottom: 50px">
+                    <span style="float: left">Jongo</span>
+                </div>
+                <div>
+            <pre style="box-shadow: none">
+                <code style="text-align: center"><!-- @formatter:on -->characters.findOne("{gender: #, first_name : #}", FEMALE, "Arya").as(...)<!-- @formatter:off --></code>
+            </pre>
+                </div>
+
+            </section>
+
+            <section>
+                <div>
+                    <span>Jongo vs. Morphia vs. Spring</span>
+                </div>
+
+                <div style="padding-top: 25px; margin-bottom: 30px">
+                    <span style="float: left">Jongo</span>
+                </div>
+                <div>
+            <pre style="box-shadow: none">
+                <code style="text-align: center"><!-- @formatter:on -->characters.findOne("{gender : #, first_name: #}", FEMALE, "Arya")
+                    .as(Heroine.class);<!-- @formatter:off --></code>
             </pre>
             </div>
-            <div style="padding-top: 25px; margin-bottom: 50px">
-                <span style="float: left">Jongo</span>
+
+            <div style="padding-top: 15px; margin-bottom: 30px">
+                <span style="float: left">Morphia</span>
             </div>
             <div>
             <pre style="box-shadow: none">
-                <code class="json">
-                    characters.findOne(new ObjectId("525ae7e130049e2a5c27ee39")).as(...);
-                </code>
+                <code style="text-align: center"><!-- @formatter:on -->ds.find(Heroine.class, "gender", Gender.FEMALE).field("first_name")
+                    .equal("Arya");<!-- @formatter:off --></code>
             </pre>
             </div>
+
+            <div style="padding-top: 15px; margin-bottom: 30px">
+                <span style="float: left">Spring data</span>
+            </div>
+            <div>
+            <pre style="box-shadow: none">
+                <code style="text-align: center"><!-- @formatter:on -->mongoTemplate.findOne(Query.query(Criteria.where("gender").is(Gender.FEMALE)
+                    .and("first_name").is("Arya")), Heroine.class);<!-- @formatter:off --></code>
+            </pre>
+            </div>
+
+        </section>
 
         </section>
 
         <section>
-            <div>
-                <span>Read</span>
-            </div>
-            <div style="padding-top: 25px; margin-bottom: 50px">
-                <span style="float: left">MongoDB Shell</span>
-            </div>
-            <div>
-            <pre style="box-shadow: none">
-                <code class="json">
-                    db.characters.findOne({gender: 'FEMALE', first_name: 'Arya'});
-                </code>
-            </pre>
-            </div>
-            <div style="padding-top: 25px; margin-bottom: 50px">
-                <span style="float: left">Jongo</span>
-            </div>
-            <div>
-            <pre style="box-shadow: none">
-                <code class="json">
-                    characters.findOne("{gender: #, first_name : #}", FEMALE, "Arya").as(...)
-                </code>
-            </pre>
-            </div>
-
-        </section>
-
         <section>
             <div>
                 <span>Update</span>
@@ -402,9 +433,7 @@
             </div>
             <div>
             <pre style="box-shadow: none">
-                <code class="json">
-                    db.weapons.update({_id: 'Lightbringer'}, {$set : {details: '...'}});
-                </code>
+                <code style="text-align: center"><!-- @formatter:on -->db.weapons.update({_id: 'Lightbringer'}, {$set : {details: '...'}});<!-- @formatter:off --></code>
             </pre>
             </div>
             <div style="padding-top: 25px; margin-bottom: 50px">
@@ -412,13 +441,48 @@
             </div>
             <div>
             <pre style="box-shadow: none">
-                <code class="json">
-                    weapons.update("{_id: 'Lightbringer').with("{$set: {details: '...'}}");
-                </code>
+                <code style="text-align: center"><!-- @formatter:on -->weapons.update("{_id: 'Lightbringer').with({$set: {details: '...'}}");<!-- @formatter:off --></code>
             </pre>
             </div>
 
         </section>
+        <section>
+            <div>
+                <span>Jongo vs. Morphia vs. Spring</span>
+            </div>
+
+            <div style="padding-top: 25px; margin-bottom: 30px">
+                <span style="float: left">Jongo</span>
+            </div>
+            <div>
+            <pre style="box-shadow: none">
+                <code style="text-align: center"><!-- @formatter:on -->weapons.update("{_id:'Lightbringer'}").with("{$set: {details: #}}",details);<!-- @formatter:off --></code>
+            </pre>
+            </div>
+
+            <div style="padding-top: 15px; margin-bottom: 30px">
+                <span style="float: left">Morphia</span>
+            </div>
+            <div>
+            <pre style="box-shadow: none">
+                <code style="text-align: center"><!-- @formatter:on -->ds.update(ds.createQuery(Weapon.class).field("id").equal("Lightbringer"),
+   ds.createUpdateOperations(Weapon.class).set("details", details));<!-- @formatter:off --></code>
+            </pre>
+            </div>
+
+            <div style="padding-top: 15px; margin-bottom: 30px">
+                <span style="float: left">Spring data</span>
+            </div>
+            <div>
+            <pre style="box-shadow: none">
+                <code style="text-align: center"><!-- @formatter:on -->mongoTemplate.findAndModify(Query.query(Criteria.where("_id")
+   .is("Lightbringer")), new Update().set("details", details), Weapon.class);<!-- @formatter:off --></code>
+            </pre>
+            </div>
+
+        </section>
+        </section>
+
 
         <section>
             <div>
@@ -429,9 +493,7 @@
             </div>
             <div>
             <pre style="box-shadow: none">
-                <code class="json">
-                    db.weapons.remove({_id: 'Lightbringer'});
-                </code>
+                <code style="text-align: center">db.weapons.remove({_id: 'Lightbringer'});</code>
             </pre>
             </div>
             <div style="padding-top: 25px; margin-bottom: 50px">
@@ -439,9 +501,7 @@
             </div>
             <div>
             <pre style="box-shadow: none">
-                <code class="json">
-                    weapons.remove("{_id: 'Lightbringer'}");
-                </code>
+                <code style="text-align: center">weapons.remove("{_id: 'Lightbringer'}");</code>
             </pre>
             </div>
 
@@ -513,10 +573,10 @@
                         <div style="font-size:22px;text-align: left;margin-left: 40px;">@amsellemyves</div>
                     </div>
                     <div style="display: table-cell; vertical-align: middle">
-                        <div class="bio">
+                        <!--div class="bio">
                             <img src="img/gmail.png" class="small_icon_like_img">
                             <span class="next_to_a_small_icon">hristov.iv@gmail.com</span>
-                        </div>
+                        </div-->
                         <!--<div class="bio" style="font-size: 0.9em;"></div>-->
                         <div class="bio">
                             <img src="img/twitter.png" class="small_icon_like_img">
@@ -531,90 +591,6 @@
             </div>
         </section>
 
-        <section>
-            <div>
-                <span>Jongo vs. Morphia vs. Spring</span>
-            </div>
-
-            <div style="padding-top: 25px; margin-bottom: 30px">
-                <span style="float: left">Jongo</span>
-            </div>
-            <div>
-            <pre style="box-shadow: none">
-                <code class="json">
-                    characters.findOne("{gender : #, first_name: #}", FEMALE, "Arya")
-                    .as(Heroine.class);
-                </code>
-            </pre>
-            </div>
-
-            <div style="padding-top: 15px; margin-bottom: 30px">
-                <span style="float: left">Morphia</span>
-            </div>
-            <div>
-            <pre style="box-shadow: none">
-                <code class="json">
-                    ds.find(Heroine.class, "gender", Gender.FEMALE).field("first_name")
-                    .equal("Arya");
-                </code>
-            </pre>
-            </div>
-
-            <div style="padding-top: 15px; margin-bottom: 30px">
-                <span style="float: left">Spring data</span>
-            </div>
-            <div>
-            <pre style="box-shadow: none">
-                <code class="json">
-                    mongoTemplate.findOne(Query.query(Criteria.where("gender").is(Gender.FEMALE)
-                    .and("first_name").is("Arya")), Heroine.class);
-                </code>
-            </pre>
-            </div>
-
-        </section>
-
-        <section>
-            <div>
-                <span>Jongo vs. Morphia vs. Spring</span>
-            </div>
-
-            <div style="padding-top: 25px; margin-bottom: 30px">
-                <span style="float: left">Jongo</span>
-            </div>
-            <div>
-            <pre style="box-shadow: none">
-                <code class="json">
-                    weapons.update("{_id:'Lightbringer'}").with("{$set: {details: #}}",details);
-                </code>
-            </pre>
-            </div>
-
-            <div style="padding-top: 15px; margin-bottom: 30px">
-                <span style="float: left">Morphia</span>
-            </div>
-            <div>
-            <pre style="box-shadow: none">
-                <code class="json">
-                    ds.update(ds.createQuery(Weapon.class).field("id").equal("Lightbringer"),
-                    ds.createUpdateOperations(Weapon.class).set("details", details));
-                </code>
-            </pre>
-            </div>
-
-            <div style="padding-top: 15px; margin-bottom: 30px">
-                <span style="float: left">Spring data</span>
-            </div>
-            <div>
-            <pre style="box-shadow: none">
-                <code class="json">
-                    mongoTemplate.findAndModify(Query.query(Criteria.where("_id").is("Lightbringer")),
-                    new Update().set("details", details), Weapon.class);
-                </code>
-            </pre>
-            </div>
-
-        </section>
     </div>
 
     <script src="lib/js/head.min.js"></script>
